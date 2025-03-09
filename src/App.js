@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaGraduationCap, FaCode, FaMusic, FaLanguage, FaChevronLeft, FaChevronRight, FaPlay, FaTimes, FaJs, FaReact, FaAngular, FaJava, FaPython, FaAws, FaGitAlt, FaFigma, FaTrello, FaBootstrap, FaCss3Alt, FaHtml5, FaNodeJs, FaDatabase, FaMobileAlt, FaCloud, FaTools, FaGamepad } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaGraduationCap, FaCode, FaMusic, FaLanguage, FaChevronLeft, FaChevronRight, FaPlay, FaTimes, FaJs, FaReact, FaAngular, FaJava, FaPython, FaAws, FaGitAlt, FaFigma, FaTrello, FaBootstrap, FaCss3Alt, FaHtml5, FaNodeJs, FaDatabase, FaMobileAlt, FaCloud, FaTools, FaGamepad, FaBars } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const themes = {
@@ -239,28 +239,28 @@ const projects = [
     title: "Majorities",
     description: "A simple board game similar to Tic-tac-toe with three difficulty levels: Easy, Medium, and Impossible.",
     tech: "Python, Random, Greedy, MonteCarlo",
-    link: "https://github.com/kromenz/Majorities.git",
+    link: "https://github.com/kromenz/Majorities",
     theme: "majorities",
   },
   {
     title: "LetHimCook",
     description: "A simple recipe management website for organizing and sharing culinary recipes.",
     tech: "HTML, CSS, Bootstrap, JavaScript, PHP",
-    link: "https://github.com/DiogoDking77/LetHimCook",
+    link: "https://github.com/DiogoDking77/Trab1_CookRecipes",
     theme: "cooking",
   },
   {
     title: "TugaTraffic",
     description: "An endless runner game where you control a car trying to survive on the road.",
     tech: "JavaScript, Phaser",
-    link: "https://github.com/DiogoDking77/TugaTraffic",
+    link: "https://github.com/kromenz/TECMUL---TP1---28234",
     theme: "traffic",
   },
   {
     title: "Smarty Party",
     description: "A browser-based party game inspired by Mario Party, featuring general knowledge questions.",
     tech: "React, Vite, Next.js, Socket.io, Tailwind",
-    link: "https://github.com/DiogoDking77/SmartyParty",
+    link: "https://github.com/DiogoDking77/Browser-Party-Client",
     theme: "party",
   },
 ];
@@ -312,6 +312,7 @@ export default function Portfolio() {
   const [showGame, setShowGame] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -365,7 +366,7 @@ export default function Portfolio() {
       <motion.div
         className={`relative group rounded-2xl shadow-lg transition-all duration-300 
           ${themes[project.theme].card.background} ${themes[project.theme].card.border}
-          ${isExpanded ? 'col-span-2 row-span-2' : ''}`}
+          ${isExpanded ? 'col-span-1 md:col-span-2 row-span-2' : ''}`}
         initial={false}
         whileHover={{ scale: isExpanded ? 1.05 : 1.02 }}
         animate={{ 
@@ -544,58 +545,81 @@ export default function Portfolio() {
       {/* Header */}
       <header className={`${themes[activeTheme].nav.background} ${themes[activeTheme].nav.border} fixed w-full top-0 z-50 flex justify-between items-center py-4 px-6 backdrop-blur-sm`}>
         <motion.h1 
-          className={`text-3xl font-bold ${themes[activeTheme].nav.textPrimary}`}
+          className={`text-2xl md:text-3xl font-bold ${themes[activeTheme].nav.textPrimary}`}
           initial={{ x: -100 }}
           animate={{ x: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
         >
           Diogo Reis
         </motion.h1>
-        <nav className="space-x-6">
-          <a href="#about" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>About</a>
-          <a href="#education" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Education</a>
-          <a href="#skills" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Skills</a>
-          <a href="#projects" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Projects</a>
-          <a href="#experience" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Experience</a>
-          <a href="#contact" className={` ${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Contact</a>
+        
+        {/* Menu desktop */}
+        <nav className="hidden md:flex space-x-6">
+          <a href="#about" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>About</a>
+          <a href="#education" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Education</a>
+          <a href="#skills" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Skills</a>
+          <a href="#projects" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Projects</a>
+          <a href="#experience" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Experience</a>
+          <a href="#contact" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`}>Contact</a>
         </nav>
+        
+        {/* Botão menu mobile */}
+        <button 
+          className="md:hidden text-2xl"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <FaTimes className={themes[activeTheme].nav.textPrimary} /> : <FaBars className={themes[activeTheme].nav.textPrimary} />}
+        </button>
+        
+        {/* Menu mobile */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className={`absolute top-full left-0 right-0 ${themes[activeTheme].nav.background} ${themes[activeTheme].nav.border} border-t flex flex-col items-center py-4 space-y-4 shadow-lg`}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <a href="#about" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href="#education" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>Education</a>
+              <a href="#skills" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>Skills</a>
+              <a href="#projects" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>Projects</a>
+              <a href="#experience" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>Experience</a>
+              <a href="#contact" className={`${themes[activeTheme].nav.textPrimary} hover:${themes[activeTheme].nav.textSecondary} transition-colors`} onClick={() => setMobileMenuOpen(false)}>Contact</a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
-      <div className="md:pt-16 pt-28 px-6 md:px-16">
-        {/* Hero Section */}
+      <div className="pt-20 md:pt-24 px-4 md:px-16">
+        {/* Hero Section - Melhorando a responsividade */}
         <motion.section 
-          className={`min-h-screen flex flex-col md:flex-row justify-center items-center text-center md:text-left gap-8 px-4 relative overflow-hidden`}
+          className={`min-h-screen flex flex-col md:flex-row justify-center items-center text-center md:text-left gap-8 px-2 md:px-4 relative overflow-hidden`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {/* Background Elements */}
+          {/* Background Elements - mantidos sem alteração */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="flex-1 max-w-xl relative z-10">
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-            </motion.div>
+          <div className="flex-1 max-w-xl relative z-10 px-4 md:px-0">
 
             <motion.h1 
-              className={`text-6xl font-bold ${themes[activeTheme].text.primary} mb-4 leading-tight`}
+              className={`text-4xl md:text-6xl font-bold ${themes[activeTheme].text.primary} mb-4 leading-tight`}
               initial={{ y: -50 }}
               animate={{ y: 0 }}
               transition={{ type: "spring", stiffness: 100 }}
             >
-              Hi, I'm Diogo Reis
+              Hi, I'm <span className="text-white">Diogo Reis</span>
             </motion.h1>
             
             <motion.p 
-              className={`text-2xl ${themes[activeTheme].text.secondary} mb-8`} 
+              className={`text-xl md:text-2xl ${themes[activeTheme].text.secondary} mb-6 md:mb-8`} 
               initial={{ y: 50 }}
               animate={{ y: 0 }}
               transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
@@ -604,21 +628,21 @@ export default function Portfolio() {
             </motion.p>
 
             <motion.div 
-              className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+              className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
             >
               <a 
                 href="#contact" 
-                className={`group ${themes[activeTheme].details.secondary}  ${themes[activeTheme].card.textSecondary} px-8 py-3 rounded-full transition-all duration-300 flex items-center justify-center`}
+                className={`group ${themes[activeTheme].details.secondary} ${themes[activeTheme].card.textSecondary} px-6 sm:px-8 py-3 rounded-full transition-all duration-300 flex items-center justify-center`}
               >
                 <span className="mr-2">Contact Me</span>
                 <FaEnvelope className="transform group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="#projects" 
-                className={`group ${themes[activeTheme].card.border} ${themes[activeTheme].card.textPrimary} px-8 py-3 rounded-full transition-all duration-300 flex items-center justify-center`}
+                className={`group ${themes[activeTheme].card.border} ${themes[activeTheme].card.textPrimary} px-6 sm:px-8 py-3 rounded-full transition-all duration-300 flex items-center justify-center`}
               >
                 <span className="mr-2">View Projects</span>
                 <FaCode className="transform group-hover:translate-x-1 transition-transform" />
@@ -626,7 +650,7 @@ export default function Portfolio() {
             </motion.div>
 
             <motion.div 
-              className="mt-12 flex items-center space-x-6"
+              className="mt-8 md:mt-12 flex items-center justify-center md:justify-start space-x-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -641,21 +665,21 @@ export default function Portfolio() {
           </div>
           
           <motion.div 
-            className="flex-1 flex justify-center items-center relative z-10 mb-4"
+            className="flex-1 flex justify-center items-center relative z-10 mb-8 md:mb-4 mt-8 md:mt-0"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-2xl opacity-20"></div>
-              <div className={`relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden ${themes[activeTheme].card.border} shadow-lg`}>
+              <div className={`relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full overflow-hidden ${themes[activeTheme].card.border} shadow-lg`}>
                 <img
                   src="/images/profile.jpg"
                   alt="Diogo Reis"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className={`absolute -bottom-4 -right-4 ${themes[activeTheme].details.secondary}  ${themes[activeTheme].card.textSecondary} px-4 py-2 rounded-full text-sm font-medium`}>
+              <div className={`absolute -bottom-4 -right-4 ${themes[activeTheme].details.secondary} ${themes[activeTheme].card.textSecondary} px-4 py-2 rounded-full text-sm font-medium`}>
                 Available for hire
               </div>
             </div>
@@ -745,6 +769,8 @@ export default function Portfolio() {
           transition={{ duration: 0.5 }}
         >
           <h2 className={`text-4xl font-semibold ${themes[activeTheme].text.primary} mb-8`}>Skills</h2>
+          
+          {/* Lista de habilidades */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(skills).map(([category, items], index) => (
               <motion.div 
