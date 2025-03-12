@@ -615,7 +615,7 @@ export default function Portfolio() {
               animate={{ y: 0 }}
               transition={{ type: "spring", stiffness: 100 }}
             >
-              Hi, I'm <span className="text-white">Diogo Reis</span>
+              Hi, I'm Diogo Reis
             </motion.h1>
             
             <motion.p 
