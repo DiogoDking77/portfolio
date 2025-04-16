@@ -919,6 +919,7 @@ export default function Portfolio() {
             ))}
           </div>
         </motion.section>
+        <Analytics />
         </div>
 
       {/* Footer */}
