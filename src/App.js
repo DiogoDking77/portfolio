@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaGraduationCap, FaCode, FaMusic, FaLanguage, FaChevronLeft, FaChevronRight, FaPlay, FaTimes, FaJs, FaReact, FaAngular, FaJava, FaPython, FaAws, FaGitAlt, FaFigma, FaTrello, FaBootstrap, FaCss3Alt, FaHtml5, FaNodeJs, FaDatabase, FaMobileAlt, FaCloud, FaTools, FaGamepad, FaBars } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react"
 
 const themes = {
   default: {
@@ -216,21 +217,21 @@ const education = {
 const projects = [
   {
     title: "Electronic Voting Platform",
-    description: "Electronic voting platform developed for Atlanse company.",
+    description: "Electronic voting platform developed for Atlanse company. I was responsible for developing most of the frontend of an electronic voting platform for the company Atlanse. The platform allows clients to create various types of voting sessions — from simple polls to more complex voting processes with subcategories, multiple phases, and different voting mechanisms. Users can create polls where participants choose a single option, select multiple options, or rank the available options, with each rank position awarding a different number of points.\n This project was a significant milestone for me, as it marked my first experience in a professional environment beyond academic projects. I worked on-site at the company's office one day per week, which helped me understand the value of collaboration and accountability. I learned how to tackle problems independently while also not hesitating to ask for feedback or help when needed.",
     tech: "Micronaut, Angular, Tailwind CSS",
     link: "https://github.com/DiogoDking77/EletronicVotingPlatform",
     theme: "voting",
   },
   {
     title: "Play2Plat",
-    description: "Android application for video game management.",
+    description: "Android application for video game management. This was an academic project focused on developing an Android application to help gamers better manage their video game libraries. The main goal was to give users more control over the games they play. Each game has its own page with several interactive features: users can mark games as favorites, add them to progression lists (e.g., Want to Play, Playing, Stopped Playing, Completed), rate the games, and engage in discussions with other users about each title.\n My main responsibility was developing most of the frontend. For every new feature, if I wasn’t the one implementing it directly, I was guiding its development and validating the final result — almost taking on the role of a frontend manager within the team.\n Currently, we’re in the process of publishing the app and have already started the setup on the Google Play Console.",
     tech: "Kotlin, Android Studio",
     link: "https://github.com/Rictrix10/Play2Plat_TPCM",
     theme: "play2plat",
   },
   {
     title: "Fight or Fall",
-    description: "Web platform for tournament creation and management.",
+    description: "Web platform for tournament creation and management. This is a personal side project I created, currently on hold while I explore better implementation options. The main goal was to build a flexible platform to help users create and manage their own tournaments, tailored to their preferred format. The platform is designed to support various tournament types, such as single or double elimination brackets, round-robin formats (either in a single table or split into groups), and even multi-phase tournaments.\n Users can add participants manually or generate a random draw. After the tournament is created, they can update match results or export the tournament bracket as a PNG — useful for printing or presenting on paper.\n At this stage, the platform supports single elimination brackets, with more features planned for future development.",
     tech: "React, Laravel, Supabase",
     link: "https://github.com/DiogoDking77/fight-or-fall-front",
     theme: "fight",
@@ -385,7 +386,14 @@ export default function Portfolio() {
           <h3 className={`${themes[project.theme].text.primary} text-xl font-semibold mb-4 capitalize`}>
             {project.title}
           </h3>
-          <p className={`mt-4 ${themes[project.theme].card.textPrimary}`}>{project.description}</p>
+          <p
+            className={`
+              mt-4 ${themes[project.theme].card.textPrimary}
+              ${isExpanded ? '' : 'whitespace-nowrap overflow-hidden text-ellipsis'}
+            `}
+          >
+            {project.description}
+          </p>
           
           {isExpanded && projectImages[project.theme] && (
             <motion.div 
